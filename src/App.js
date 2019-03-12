@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
-import Button from '@material-ui/core/Button';
 import {Route, Switch, withRouter} from 'react-router-dom'
 import Home from './components/Home'
+import NavBar from './components/NavBar'
+import InfluencerList from './containers/InfluencerList'
+import PhotographerList from'./containers/PhotographerList'
+
 
 class App extends Component {
 
 state = {
-  user: ''
+  user: '',
+  users: []
 }
 
 
 componentDidMount() {
-
+    this.fetchUsers()
     let token= localStorage.getItem("token")
     if (token) {
 
@@ -36,12 +39,23 @@ componentDidMount() {
     }
   }
 
+fetchUsers = () => {
+  fetch('http://localhost:3000/api/v1/users', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Action: "application/json"
+        }
+      }).then(r => r.json())
+    .then(data => this.setState({users: data.users}))
+}
 handleSignUp = newUser => {
    this.createUser(newUser);
    this.props.history.push('/');
 }
 
 createUser = newUser => {
+  console.log(newUser)
     fetch('http://localhost:3000/api/v1/users', {
       method: 'POST',
       headers: {
@@ -89,14 +103,18 @@ logOut = () => {
 
 
   render() {
-    console.log(this.state.user)
+  let influencers = [...this.state.users].filter(user => user.influencer === true )
+  let photographers = [...this.state.users].filter(user => user.photographer === true )
 
     return (
       <div className="App">
+    <NavBar logOut={this.logOut}/>
     <Switch>
+     <Route path="/influencers" render = {() => <InfluencerList influencers={influencers}/>} />
+     <Route path="/photographers" render = {() => <PhotographerList photographers={photographers}/>} />
      <Route path="/log-in" render ={() => <LogIn handleLogIn={this.handleLogIn}/>} />
      <Route path="/sign-up" render ={() => <SignUp handleSignUp={this.handleSignUp}/>} />
-     <Route path="/" render={() => <Home logOut={this.logOut}/>} />
+     <Route path="/" render={() => <Home />} />
      </Switch>
       </div>
     );

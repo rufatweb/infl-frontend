@@ -7,9 +7,6 @@ const Home = (props) => {
     return (
       <div className='home'>
       Home
-      <ul>
-       <li onClick={props.logOut}>Log Out</li>
-       </ul>
     </div>
   )
 }
