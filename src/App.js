@@ -103,8 +103,8 @@ logOut = () => {
 
 
   render() {
-  let influencers = [...this.state.users].filter(user => user.influencer === true )
-  let photographers = [...this.state.users].filter(user => user.photographer === true )
+  let influencers = [...this.state.users].filter(user => user.title.includes('influencer'))
+  let photographers = [...this.state.users].filter(user => user.title.includes('photographer') )
 
     return (
       <div className="App">

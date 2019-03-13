@@ -15,7 +15,7 @@ class PhotographerList extends React.Component {
 
     return (
       <div className='user-list'>
-
+  
     </div>
   )
   }

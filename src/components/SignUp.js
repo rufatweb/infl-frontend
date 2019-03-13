@@ -9,10 +9,12 @@ class SignUp extends React.Component {
     username: '',
     email: '',
     password: '',
-    influencer: true,
-    photographer: false
+    title: 'influencer'
   }
 
+handleChange = (e, radioName) => {
+  this.setState({[e.target.name]: e.target.value})
+}
 
 
   handleSubmit = (e) => {
@@ -22,8 +24,7 @@ class SignUp extends React.Component {
    username: '',
    email: '',
    password: '',
-   influencer: true,
-   photographer: false
+   title: ''
  })
   }
 
@@ -35,31 +36,41 @@ class SignUp extends React.Component {
     label='username'
       name="username"
       value={this.state.username}
-      onChange={(e) => this.setState({username: e.target.value})} />
+      onChange={this.handleChange} />
   <TextField
  label='email'
 type="email"
  name="email"
    value={this.state.email}
-   onChange={(e) => this.setState({email: e.target.value})} />
+   onChange={this.handleChange} />
 
 <TextField
 label='password'
  type="password"
  name="password"
  value={this.state.password}
- onChange={(e) => this.setState({password: e.target.value})} />
+ onChange={this.handleChange} />
 <p></p>
 
 
        Influencer <Radio
-          checked={this.state.influencer}
-          onClick={() => this.setState({influencer: !this.state.influencer, photographer: !this.state.photographer})}
+        checked={this.state.title === 'influencer'}
+        onClick={this.handleChange}
+        value="influencer"
+        name="title"
         />
         Photographer <Radio
-           checked={this.state.photographer}
-           onClick={() => this.setState({influencer: !this.state.influencer, photographer: !this.state.photographer})}
+         checked={this.state.title === 'photographer'}
+         onClick={this.handleChange}
+         value="photographer"
+         name="title"
          />
+         Both <Radio
+          checked={this.state.title === 'influencer/photographer'}
+          onClick={this.handleChange}
+          value="influencer/photographer"
+          name="title"
+          />
 
 
 
