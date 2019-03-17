@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import {TextField, Button, Radio} from '@material-ui/core';
 
 
@@ -37,13 +36,14 @@ handleChange = (e, radioName) => {
       name="username"
       value={this.state.username}
       onChange={this.handleChange} />
+      <p></p>
   <TextField
  label='email'
 type="email"
  name="email"
    value={this.state.email}
    onChange={this.handleChange} />
-
+<p></p>
 <TextField
 label='password'
  type="password"
@@ -71,7 +71,7 @@ label='password'
           value="influencer/photographer"
           name="title"
           />
-
+      <p></p>
 
 
      <Button type='submit'>Sign Up</Button>

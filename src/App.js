@@ -5,20 +5,17 @@ import LogIn from './components/LogIn'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import Home from './components/Home'
 import NavBar from './components/NavBar'
-import InfluencerList from './containers/InfluencerList'
-import PhotographerList from'./containers/PhotographerList'
+import UserListContainer from './containers/UserListContainer'
 
 
 class App extends Component {
 
 state = {
-  user: '',
-  users: []
+  user: ''
 }
 
 
 componentDidMount() {
-    this.fetchUsers()
     let token= localStorage.getItem("token")
     if (token) {
 
@@ -39,23 +36,14 @@ componentDidMount() {
     }
   }
 
-fetchUsers = () => {
-  fetch('http://localhost:3000/api/v1/users', {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Action: "application/json"
-        }
-      }).then(r => r.json())
-    .then(data => this.setState({users: data.users}))
-}
+
 handleSignUp = newUser => {
    this.createUser(newUser);
    this.props.history.push('/');
 }
 
 createUser = newUser => {
-  console.log(newUser)
+
     fetch('http://localhost:3000/api/v1/users', {
       method: 'POST',
       headers: {
@@ -103,15 +91,12 @@ logOut = () => {
 
 
   render() {
-  let influencers = [...this.state.users].filter(user => user.title.includes('influencer'))
-  let photographers = [...this.state.users].filter(user => user.title.includes('photographer') )
 
     return (
       <div className="App">
     <NavBar logOut={this.logOut}/>
+    <UserListContainer />
     <Switch>
-     <Route path="/influencers" render = {() => <InfluencerList influencers={influencers}/>} />
-     <Route path="/photographers" render = {() => <PhotographerList photographers={photographers}/>} />
      <Route path="/log-in" render ={() => <LogIn handleLogIn={this.handleLogIn}/>} />
      <Route path="/sign-up" render ={() => <SignUp handleSignUp={this.handleSignUp}/>} />
      <Route path="/" render={() => <Home />} />
