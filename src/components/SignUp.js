@@ -4,7 +4,10 @@ import {TextField, Button, Radio, Select} from '@material-ui/core';
 import ReactGoogleMapLoader from "react-google-maps-loader"
 import ReactGooglePlacesSuggest from "react-google-places-suggest"
 
+
 const API_KEY = "."
+
+
 
 class SignUp extends React.Component {
 
@@ -77,6 +80,7 @@ label='password'
           googleMaps={googleMaps}
           onSelectSuggest={this.handleSelectSuggest}
         >
+
           <TextField
             label="city"
             type="text"
@@ -84,6 +88,7 @@ label='password'
             value={this.state.location}
             onChange={this.handleChange}
           />
+
         </ReactGooglePlacesSuggest>
       </div>
     )
