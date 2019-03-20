@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardActionArea, CardActions, CardContent, Avatar, Button, Typography, Grid} from '@material-ui/core'
+import { Card, CardActionArea, CardActions, CardContent, Avatar, Button, Typography} from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
@@ -20,7 +20,6 @@ const styles = {
 };
 
 const UserCard = (props) => {
-  console.log(props)
   const { classes, user } = props;
   return (
     <div className={classes.root}>

@@ -25,9 +25,9 @@ class UserList extends React.Component {
 
 
   render () {
-    const { classes } = this.props;
+    const { classes, users } = this.props;
 
-  let listUsers = this.props.users.map(user => <UserCard key={user.id} user={user}/>)
+  let listUsers = users.map(user => <UserCard key={user.id} user={user}/>)
     return (
 
     <div className={classes.root}>
