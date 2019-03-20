@@ -4,7 +4,7 @@ import {TextField, Button, Radio, Select} from '@material-ui/core';
 import ReactGoogleMapLoader from "react-google-maps-loader"
 import ReactGooglePlacesSuggest from "react-google-places-suggest"
 
-const API_KEY = "AIzaSyDX0rzV3E_b7r27uTfa34dwocnhksnLPzc"
+const API_KEY = ".."
 
 class SignUp extends React.Component {
 
