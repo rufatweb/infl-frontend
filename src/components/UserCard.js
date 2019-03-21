@@ -2,6 +2,8 @@ import React from 'react'
 import { Card, CardActionArea, CardActions, CardContent, Avatar, Button, Typography} from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
 
 const styles = {
   root: {
@@ -27,7 +29,7 @@ const UserCard = (props) => {
       <CardActionArea >
         <Avatar
           className={classes.bigAvatar}
-          src="https://i.pinimg.com/236x/ed/bc/ef/edbceff5b8e2c33a3c78db336b81eac7--camera-photography-white-photography.jpg"
+          src={`${user.imgUrl}`}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
@@ -39,9 +41,9 @@ const UserCard = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Link to={`/${user.username}`}><Button onClick={() => props.handleProfile(user)} size="small" color="primary">
           See Profile
-        </Button>
+        </Button></Link>
       </CardActions>
     </Card>
 

@@ -3,6 +3,9 @@ import UserCard from '../components/UserCard'
 import {GridList, GridListTile, ListSubheader} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -27,13 +30,13 @@ class UserList extends React.Component {
   render () {
     const { classes, users } = this.props;
 
-  let listUsers = users.map(user => <UserCard key={user.id} user={user}/>)
+  let listUsers = users.map(user => <UserCard handleProfile={this.props.handleProfile} key={user.id} user={user}/>)
     return (
 
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-          <ListSubheader component="div">Photographers</ListSubheader>
+         <ListSubheader component="div">Users</ListSubheader>
         </GridListTile>
         {listUsers}
       </GridList>
@@ -45,4 +48,5 @@ class UserList extends React.Component {
 UserList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+
 export default withStyles(styles)(UserList);

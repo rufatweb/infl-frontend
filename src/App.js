@@ -6,12 +6,13 @@ import {Route, Switch, withRouter} from 'react-router-dom'
 import Home from './components/Home'
 import NavBar from './components/NavBar'
 import UserListContainer from './containers/UserListContainer'
+import UserProfile from './components/UserProfile'
 
 
 class App extends Component {
 
 state = {
-  user: ''
+  currentUser: ''
 }
 
 
@@ -29,7 +30,7 @@ componentDidMount() {
       })
         .then(r => r.json())
         .then(json => {
-          this.setState({ user: json.user})
+          this.setState({ currentUser: json.user})
         })
     } else {
       this.props.history.push('/log-in');
@@ -54,7 +55,7 @@ createUser = newUser => {
     }).then(r => r.json())
     .then(json => {
       localStorage.setItem("token", json.jwt)
-      this.setState({user: json.user})
+      this.setState({currentUser: json.user})
     })
  }
  handleLogIn = (logInData) => {
@@ -79,13 +80,13 @@ createUser = newUser => {
 } )
   .then(json => {
     localStorage.setItem("token", json.jwt)
-    this.setState({user: json.user})
+    this.setState({currentUser: json.user})
   })
 }
 
 logOut = () => {
   localStorage.removeItem('token')
-  this.setState({user: ''})
+  this.setState({currentUser: ''})
   this.props.history.push('/');
 }
 
@@ -94,12 +95,12 @@ logOut = () => {
 
     return (
       <div className="App">
-    <NavBar logOut={this.logOut}/>
-    <UserListContainer />
+    <NavBar user={this.state.currentUser} logOut={this.logOut}/>
+   <UserListContainer />}
     <Switch>
+     <Route path="/my_profile" render ={() => <UserProfile user={this.state.currentUser}/>} />
      <Route path="/log-in" render ={() => <LogIn handleLogIn={this.handleLogIn}/>} />
      <Route path="/sign-up" render ={() => <SignUp handleSignUp={this.handleSignUp}/>} />
-     <Route path="/" render={() => <Home />} />
      </Switch>
       </div>
     );

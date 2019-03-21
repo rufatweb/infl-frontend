@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from "prop-types"
-import {TextField, Button, Radio, Select} from '@material-ui/core';
+import {TextField, Button, Radio} from '@material-ui/core';
 import ReactGoogleMapLoader from "react-google-maps-loader"
 import ReactGooglePlacesSuggest from "react-google-places-suggest"
 
 
-const API_KEY = "."
+const API_KEY = "..."
 
 
 
@@ -16,7 +16,8 @@ class SignUp extends React.Component {
     email: '',
     password: '',
     title: 'influencer',
-    location: ''
+    location: '',
+    imgUrl: ''
   }
 
 handleChange = (e) => {
@@ -39,7 +40,8 @@ handleSelectSuggest = (suggest) => {
    email: '',
    password: '',
    title: 'influencer',
-   location: ''
+   location: '',
+   imgUrl: ''
  })
   }
 
@@ -67,6 +69,11 @@ label='password'
  value={this.state.password}
  onChange={this.handleChange} />
 <p></p>
+<TextField
+label='image'
+ name="imgUrl"
+ value={this.state.imgUrl}
+ onChange={this.handleChange} />
 <ReactGoogleMapLoader
   params={{
     key: API_KEY,
