@@ -5,7 +5,7 @@ import ReactGoogleMapLoader from "react-google-maps-loader"
 import ReactGooglePlacesSuggest from "react-google-places-suggest"
 
 
-const API_KEY = "..."
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
 
 
 

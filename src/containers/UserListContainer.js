@@ -6,14 +6,15 @@ import Home from '../components/Home'
 
 class UserListContainer extends React.Component {
 
+ _isMounted = false;
 
   state = {
-    users: [],
-    user: ''
+    users: []
   }
 
 
   componentDidMount() {
+     this._isMounted = true;
 
     fetch('http://localhost:3000/api/v1/users', {
           method: "GET",
@@ -22,15 +23,23 @@ class UserListContainer extends React.Component {
             Action: "application/json"
           }
         }).then(r => r.json())
-      .then(data => this.setState({users: data.users}))
-  }
+      .then(data => {
+         if (this._isMounted) {
+          this.setState({users: data.users})
+        }
+        }
+      )
+      }
 
-  handleProfile = (user) => {
-    this.setState({user})
 
-  }
+
+
+  componentWillUnmount() {
+     this._isMounted = false
+   }
 
   render () {
+    console.log(this.state)
 
     let influencers = [...this.state.users].filter(user => user.title.includes('influencer'))
     let photographers = [...this.state.users].filter(user => user.title.includes('photographer'))
@@ -38,12 +47,11 @@ class UserListContainer extends React.Component {
     return (
       <div className='user-list-container'>
       <Switch>
-      <Route path={`/${this.state.user.username}`} render = {() => <UserProfile user={this.state.user}/>} />
-      <Route path="/influencers" render = {() => <UserList handleProfile={this.handleProfile} users={influencers}/>} />
-      <Route path="/photographers" render = {() => <UserList handleProfile={this.handleProfile} users={photographers}/>} />
+      <Route path="/influencers" render = {() => <UserList handleProfile={this.props.handleProfile} users={influencers}/>} />
+      <Route path="/photographers" render = {() => <UserList handleProfile={this.props.handleProfile} users={photographers}/>} />
        </Switch>
     </div>
-  )
+   )
   }
 }
 

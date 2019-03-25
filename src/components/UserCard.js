@@ -12,7 +12,8 @@ const styles = {
   },
   card: {
     margin: 10,
-    padding: 18
+    padding: 18,
+    textAlign: 'center',
   },
   bigAvatar: {
    margin: 'auto',
@@ -21,8 +22,12 @@ const styles = {
  },
 };
 
-const UserCard = (props) => {
-  const { classes, user } = props;
+class UserCard extends React.Component {
+
+
+
+  render() {
+    const { classes, user } = this.props;
   return (
     <div className={classes.root}>
     <Card square={false} className={classes.card}>
@@ -36,12 +41,12 @@ const UserCard = (props) => {
           {user.username}
           </Typography>
           <Typography component="h3">
-            {user.title}
+            {user.title} <p></p> {user.location}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Link to={`/${user.username}`}><Button onClick={() => props.handleProfile(user)} size="small" color="primary">
+        <Link to={`/${user.username}`}><Button onClick={() => this.props.handleProfile(user)} size="small" color="primary">
           See Profile
         </Button></Link>
       </CardActions>
@@ -51,6 +56,7 @@ const UserCard = (props) => {
     </div>
 
   );
+}
 }
 
 UserCard.propTypes = {

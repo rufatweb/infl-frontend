@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-
+import {TextField, Button} from '@material-ui/core';
 class LogIn extends React.Component {
 
 
@@ -25,16 +25,26 @@ render () {
     <h1>Please log in</h1>
     <form onSubmit={this.handleSubmit}>
 
+    <TextField
+   label='username'
+     name="username"
+     value={this.state.username}
+     onChange={this.handleChange} />
+     <p></p>
+     <TextField
+     label='password'
+      type="password"
+      name="password"
+      value={this.state.password}
+      onChange={this.handleChange} />
+     <p></p>
 
-       <input type='text' name='username' value={this.state.username} placeholder='username' onChange={this.handleChange} />
 
 
-     <input type='password' name='password' value={this.state.password} placeholder='password' onChange={this.handleChange} />
-
-     <button type='submit'>Log In</button>
+     <Button type='submit'>Log In</Button>
    </form>
   <h3>Need an account?</h3>
-  <Link to="/sign-up"><button color="orange">Sign Up</button></Link>
+  <Link to="/sign-up"><Button >Sign Up</Button></Link>
     </div>
   )
 }

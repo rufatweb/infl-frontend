@@ -12,7 +12,8 @@ import UserProfile from './components/UserProfile'
 class App extends Component {
 
 state = {
-  currentUser: ''
+  currentUser: '',
+  profile: ''
 }
 
 
@@ -90,17 +91,23 @@ logOut = () => {
   this.props.history.push('/');
 }
 
+handleProfile = (user) => {
+  this.setState({profile: user})
+}
 
   render() {
 
     return (
       <div className="App">
-    <NavBar user={this.state.currentUser} logOut={this.logOut}/>
-   <UserListContainer />}
+    <NavBar handleProfile={this.handleProfile} user={this.state.currentUser} logOut={this.logOut}/>
+
     <Switch>
-     <Route path="/my_profile" render ={() => <UserProfile user={this.state.currentUser}/>} />
+     <Route path="/influencers" render ={() => <UserListContainer handleProfile={this.handleProfile}/>} />
+     <Route path="/photographers" render ={() => <UserListContainer handleProfile={this.handleProfile}/>} />
+     <Route path={`/${this.state.profile.username}`} render ={() => <UserProfile user={this.state.profile}/>} />
      <Route path="/log-in" render ={() => <LogIn handleLogIn={this.handleLogIn}/>} />
      <Route path="/sign-up" render ={() => <SignUp handleSignUp={this.handleSignUp}/>} />
+     <Route path="/" render={() => <Home/>} />
      </Switch>
       </div>
     );
