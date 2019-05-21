@@ -26,14 +26,12 @@ handleChange = (e) => {
 
 
 handleSelectSuggest = (suggest) => {
-  console.log(suggest)
   this.setState({location: suggest.formatted_address})
 }
 
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state)
  this.props.handleSignUp(this.state)
  this.setState({
    username: '',
@@ -89,7 +87,7 @@ label='image'
         >
 
           <TextField
-            label="city"
+            label="location"
             type="text"
             name="location"
             value={this.state.location}
