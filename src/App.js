@@ -7,7 +7,7 @@ import Home from './components/Home'
 import NavBar from './components/NavBar'
 import UserListContainer from './containers/UserListContainer'
 import UserProfile from './components/UserProfile'
-
+import ConversationList from './containers/ConversationList';
 
 class App extends Component {
 
@@ -59,10 +59,13 @@ createUser = newUser => {
       this.setState({currentUser: json.user})
     })
  }
+
  handleLogIn = (logInData) => {
    this.getUser(logInData)
+   // this.saveTokenAsCookie()
    this.props.history.push('/');
  }
+
 
  getUser = (logInData) => {
   fetch('http://localhost:3000/api/v1/login', {
@@ -95,6 +98,10 @@ handleProfile = (user) => {
   this.setState({profile: user})
 }
 
+// saveTokenAsCookie = () => {
+//    document.cookie = `X-Authorization=${localStorage.getItem('token')};path=/`;
+// }
+
   render() {
 
     return (
@@ -104,7 +111,8 @@ handleProfile = (user) => {
     <Switch>
      <Route path="/influencers" render ={() => <UserListContainer handleProfile={this.handleProfile}/>} />
      <Route path="/photographers" render ={() => <UserListContainer handleProfile={this.handleProfile}/>} />
-     <Route path={`/${this.state.profile.username}`} render ={() => <UserProfile user={this.state.profile}/>} />
+     <Route path="/inbox" render ={() => <ConversationList user={this.state.currentUser}/>} />
+     <Route path={`/${this.state.profile.username}`} render ={() => <UserProfile sender={this.state.currentUser} user={this.state.profile}/>} />
      <Route path="/log-in" render ={() => <LogIn handleLogIn={this.handleLogIn}/>} />
      <Route path="/sign-up" render ={() => <SignUp handleSignUp={this.handleSignUp}/>} />
      <Route path="/" render={() => <Home/>} />

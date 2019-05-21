@@ -34,7 +34,7 @@ class UserCard extends React.Component {
       <CardActionArea >
         <Avatar
           className={classes.bigAvatar}
-          src={`${user.imgUrl}`}
+          src={`${user.img_url}`}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

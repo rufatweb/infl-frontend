@@ -39,7 +39,7 @@ class UserListContainer extends React.Component {
    }
 
   render () {
-    console.log(this.state)
+  
 
     let influencers = [...this.state.users].filter(user => user.title.includes('influencer'))
     let photographers = [...this.state.users].filter(user => user.title.includes('photographer'))

@@ -46,6 +46,7 @@ render() {
         <Link to={`/${user.username}`}><MenuItem  onClick={(e) => {this.props.handleProfile(user); this.handleClose(e)}} ><Avatar alt="user" src={`${user.imgUrl}`} className={classes.avatar} />My Profile</MenuItem></Link>
       <Link to="/influencers"><MenuItem onClick={this.handleClose}>Influencers</MenuItem></Link>
       <Link to="/photographers"><MenuItem onClick={this.handleClose}>Photographers</MenuItem></Link>
+      <Link to="/inbox"><MenuItem onClick={this.handleClose}>Inbox</MenuItem></Link>
       <Link to="/"><MenuItem onClick={this.handleClose}>Home</MenuItem></Link>
       <Link to="/"><MenuItem onClick={this.props.logOut}>Log Out</MenuItem></Link>)
       </Menu>
